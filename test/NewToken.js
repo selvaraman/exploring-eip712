@@ -35,7 +35,7 @@ contract("NewToken", function (accounts) {
         ],
       },
       domain: {
-        name: "My Token",
+        name: "NewToken",
         version: "1",
         chainId,
         verifyingContract: this.token.address,
@@ -52,7 +52,15 @@ contract("NewToken", function (accounts) {
       data,
     });
     const { v, r, s } = fromRpcSig(signedVal);
-    await this.token.permit(owner, spender, value, constants.MAX_UINT256, v, r, s);
-    expect(await this.token.nonces(owner)).to.be.bignumber.equal('1');
+    await this.token.permit(
+      owner,
+      spender,
+      value,
+      constants.MAX_UINT256,
+      v,
+      r,
+      s
+    );
+    expect(await this.token.nonces(owner)).to.be.bignumber.equal("1");
   });
 });
